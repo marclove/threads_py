@@ -1,0 +1,34 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <table>
+        <tbody>
+            <tr>
+                <th colspan="2">Quota Usage</th>
+                <td colspan="2">{{ quotaUsage }}</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Config</th>
+                <th>Quota Total</th>
+                <td>{{ config.quota_total }}</td>
+            </tr>
+            <tr>
+                <th>Quota Duration</th>
+                <td>{{ config.quota_duration }}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Reply Quota Usage</th>
+                <td colspan="2">{{ replyQuotaUsage }}</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Reply Config</th>
+                <th>Reply Quota Total</th>
+                <td>{{ replyConfig.quota_total }}</td>
+            </tr>
+            <tr>
+                <th>Reply Quota Duration</th>
+                <td>{{ replyConfig.quota_duration }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

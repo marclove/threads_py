@@ -1,0 +1,17 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    {% include "insights.jinja2" %}
+    <br>
+    <form class="insights" action="/userInsights" method="GET">
+        <span>
+            <label for="since">Since</label>
+            <input id="since" type="date" name="since" value="{{ since }}">
+        </span>
+        <span>
+            <label for="until">Until</label>
+            <input id="until" type="date" name="until" value="{{ until }}">
+        </span>
+        <input id="submit" class="threads-button" type="submit" value="Refine">
+    </form>
+{% endblock %}

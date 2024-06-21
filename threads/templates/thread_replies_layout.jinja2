@@ -1,0 +1,57 @@
+<table class="thread-replies">
+  <thead>
+      <tr>
+          <th>ID</th>
+          <th>Created On</th>
+          <th>Media Type</th>
+          <th>Text</th>
+          <th>Permalink</th>
+          {% if manage %}
+              <th>Manage</th>
+          {% endif %}
+          <th>Reply</th>
+      </tr>
+  </thead>
+  <tbody>
+      {% for reply in replies %}
+          <tr class="thread-replies-list-item">
+              <td class="reply-id">
+                  <a href="/threads/{{ reply.id }}">{{ reply.id }}</a>
+              </td>
+              <td class="reply-timestamp">{{ reply.timestamp }}</td>
+              <td class="reply-type">{{ reply.media_type }}</td>
+              <td class="reply-text">{{ reply.text }}</td>
+              <td class="reply-permalink">
+                  <a href="{{ reply.permalink }}" target="_blank">View on Threads</a>
+              </td>
+              {% if manage %}
+                  <td class="manage-reply">
+                      {% if username != reply.username %}
+                          <form class="hide-reply" action="/manage_reply/{{ reply.id }}?hide={{ 'true' if reply.hide_status != 'HIDDEN' else 'false' }}&username={{ username }}" method="POST">
+                              <input type="submit" value="{{ 'Unhide' if reply.hide_status == 'HIDDEN' else 'Hide' }}">
+                          </form>
+                      {% else %}
+                          <p title="Cannot hide your own replies.">ⓘ</p>
+                      {% endif %}
+                  </td>
+              {% endif %}
+              <td>
+                  <button onclick="location.href='/upload?replyToId={{ reply.id }}'">Reply</button>
+              </td>
+          </tr>
+      {% endfor %}
+  </tbody>
+</table>
+
+<div class="paging">
+  {% if paging.nextUrl %}
+      <div class="paging-next">
+          <a href="{{ paging.nextUrl }}">Next</a>
+      </div>
+  {% endif %}
+  {% if paging.previousUrl %}
+      <div class="paging-previous">
+          <a href="{{ paging.previousUrl }}">Previous</a>
+      </div>
+  {% endif %}
+</div>

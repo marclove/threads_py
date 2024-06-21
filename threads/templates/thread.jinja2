@@ -1,0 +1,58 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Field</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Media Type</td>
+                <td>{{ media_type }}</td>
+            </tr>
+            <tr>
+                <td>Text</td>
+                <td>{{ text }}</td>
+            </tr>
+            <tr>
+                <td>Created On</td>
+                <td>{{ timestamp }}</td>
+            </tr>
+            <tr>
+                <td>Media URL</td>
+                <td>
+                    <a href="{{ media_url }}" target="_blank">{{ media_url }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Permalink</td>
+                <td>
+                    <a href="{{ permalink }}" target="_blank">{{ permalink }}</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Replies</td>
+                <td>
+                    <a href="/threads/{{ threadId }}/replies?username={{ username }}">View Direct Replies</a>
+                    <br>
+                    {% if not is_reply %}
+                        <a href="/threads/{{ threadId }}/conversation?username={{ username }}">View Conversation</a>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <td>Reply Audience</td>
+                <td>{{ reply_audience }}</td>
+            </tr>
+            <tr>
+                <td>Insights</td>
+                <td>
+                    <a href="/threads/{{ threadId }}/insights">View Insights</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

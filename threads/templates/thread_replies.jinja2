@@ -1,0 +1,12 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <p>Top-level replies to <a href="/threads/{{ threadId }}">thread {{ threadId }}</a></p>
+
+    {% include "thread_replies_layout.jinja2" %}
+{% endblock %}
+
+{% block scripts %}
+    <script src="/scripts/form.js" type="text/javascript"></script>
+    <script src="/scripts/hide-reply.js" type="text/javascript"></script>
+{% endblock %}

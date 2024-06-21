@@ -1,0 +1,24 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+  <div>
+    <div class="profile-picture">
+      <img src="{{ threads_profile_picture_url }}" alt="User's profile picture" width="36" height="36">
+    </div>
+    <div class="username">
+      <span>
+        <a href="{{ user_profile_url }}" target="_blank">@{{ username }}</a>
+      </span>
+    </div>
+    <div class="user-bio">
+      <p>{{ threads_biography }}</p>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button onclick="location.href='/upload'">Publish</button>
+    <button onclick="location.href='/threads'">Read</button>
+    <button onclick="location.href='/userInsights'">Insights</button>
+    <button onclick="location.href='/publishingLimit'">Publishing Limit</button>
+  </div>
+{% endblock %}

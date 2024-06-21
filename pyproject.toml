@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "threads_py"
+version = "0.1.0"
+package-mode = true
+description = ""
+authors = ["Marc Love <marclove@users.noreply.github.com>"]
+readme = "README.md"
+license = ""
+repository = "https://github.com/marclove/threads_py"
+keywords = []
+classifiers = []
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+flask = "^3.0.3"
+setuptools = "^70.1.0"
+flask-session = "^0.8.0"
+python-dotenv = "^1.0.1"
+jsonify = "^0.5"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^8"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

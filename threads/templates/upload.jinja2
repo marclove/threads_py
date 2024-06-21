@@ -1,0 +1,88 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <style type="text/css">
+        div.attachments-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        div.attachment-controls {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+        }
+        div.attachment-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        textarea::placeholder {
+            text-align: left;
+            line-height: 15px;
+        }
+        textarea {
+            text-align: left;
+            padding: 5px 0;
+        }
+        img {
+            margin-bottom: 15px;
+        }
+    </style>
+
+    {% if replyToId is not none %}
+        <p style="color: gray">Replying to {{ replyToId }}</p>
+    {% endif %}
+
+    <form action="/upload" id="form" method="POST">
+        <label for="text">Text:</label>
+        <textarea placeholder="Start a thread..." id="text" name="text" autocomplete="off"></textarea>
+        <br>
+        To attach an image or video, click the image below
+        <div class="attachments-area">
+            <img id="attachments-button" src={{ url_for('static', filename = 'images/loading.gif') }}>
+            <div class="attachment-controls">
+                <div id="attachments-list" class="attachments"></div>
+            </div>
+        </div>
+
+        <label for="reply-control">Who Can Reply</label>
+        <select id="reply-control" name="replyControl" hint="Reply Control">
+            <option value="" selected></option>
+            <option value="everyone">Everyone</option>
+            <option value="accounts_you_follow">Accounts You Follow</option>
+            <option value="mentioned_only">Mentioned Only</option>
+        </select>
+
+        <input type="hidden" name="replyToId" value="{{ replyToId }}">
+        <input class="threads-button" type="submit" id="submit" value="Post">
+
+        <p id="media-type-explanation">Media Type:&nbsp;
+            <span id="media-type"></span>
+        </p>
+    </form>
+
+    <script id="attachment-template" type="text/template">
+        <div class="attachment-item">
+            <label for="attachmentType">Type &nbsp;&nbsp;</label>
+            <select name="attachmentType[]">
+                <option value="Image">Image</option>
+                <option value="Video">Video</option>
+            </select>
+            <label for="attachmentUrl">URL &nbsp;&nbsp;</label>
+            <input type="text" name="attachmentUrl[]" autocomplete="off">
+
+            <!-- The parent of this node will be removed from the DOM -->
+            <span class="delete">❌</span>
+            <br>
+        </div>
+    </script>
+{% endblock %}
+
+{% block scripts %}
+    <script src={{ url_for('static', filename = 'scripts/form.js') }} type="text/javascript"></script>
+    <script src={{ url_for('static', filename = 'scripts/upload.js') }} type="text/javascript"></script>
+{% endblock %}

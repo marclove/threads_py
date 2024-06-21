@@ -1,0 +1,7 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <p>Conversation for <a href="/threads/{{ threadId }}">thread {{ threadId }}</a></p>
+
+    {% include "thread_replies_layout.jinja2" %}
+{% endblock %}

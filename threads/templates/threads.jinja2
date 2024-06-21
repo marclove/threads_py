@@ -1,0 +1,45 @@
+{% extends "layout_with_account.jinja2" %}
+
+{% block content %}
+    <table class="threads-list">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Created On</th>
+                <th>Media Type</th>
+                <th>Text</th>
+                <th>Permalink</th>
+                <th>Reply Audience</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for thread in threads %}
+                <tr class="threads-list-item">
+                    <td class="thread-id">
+                        <a href="/threads/{{ thread.id }}">{{ thread.id }}</a>
+                    </td>
+                    <td class="thread-timestamp">{{ thread.timestamp }}</td>
+                    <td class="thread-type">{{ thread.media_type }}</td>
+                    <td class="thread-text">{{ thread.text }}</td>
+                    <td class="thread-permalink">
+                        <a href="{{ thread.permalink }}" target="_blank">View on Threads</a>
+                    </td>
+                    <td class="thread-reply-audience">{{ thread.reply_audience }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="paging">
+        {% if paging.nextUrl %}
+            <div class="paging-next">
+                <a href="{{ paging.nextUrl }}">Next</a>
+            </div>
+        {% endif %}
+        {% if paging.previousUrl %}
+            <div class="paging-previous">
+                <a href="{{ paging.previousUrl }}">Previous</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
