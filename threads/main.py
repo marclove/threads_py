@@ -256,29 +256,24 @@ def publishing_limit():
 @app.route('/upload')
 @logged_in_user_checker
 def upload():
-    reply_to_id = request.args.get('replyToId')
-    title = 'Upload' if reply_to_id is None else 'Upload (Reply)'
+    reply_to_id = request.args.get('replyToId', '')
+    title = 'Upload' if reply_to_id == '' else 'Upload (Reply)'
     return render_template('upload.jinja2', title=title, replyToId=reply_to_id)
 
 @app.route('/upload', methods=['POST'])
 @logged_in_user_checker
 def handle_upload():
     text = request.form.get('text')
-    attachment_type = request.form.getlist('attachmentType')
-    attachment_url = request.form.getlist('attachmentUrl')
+    attachment_type = request.form.getlist('attachmentType[]')
+    attachment_url = request.form.getlist('attachmentUrl[]')
     reply_control = request.form.get('replyControl')
     reply_to_id = request.form.get('replyToId')
-
-    if reply_to_id in (None, 'None'):
-        reply_to_id = ''
 
     params: dict[str, Any] = {
         PARAMS__TEXT: text,
         PARAMS__REPLY_CONTROL: reply_control,
         PARAMS__REPLY_TO_ID: reply_to_id,
     }
-
-    print(f"params: {params}")
 
     if not attachment_type:
         params['media_type'] = MEDIA_TYPE__TEXT
@@ -301,7 +296,7 @@ def handle_upload():
             return jsonify({'error': True, 'message': f"Error creating child elements: {e}"}), 500
 
     url = build_graph_api_url(f"{session[PARAMS__USER_ID]}/threads", params, session[PARAMS__ACCESS_TOKEN])
-    print(url)
+
     try:
         response = requests.post(url)
         data = response.json()
