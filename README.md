@@ -1,5 +1,12 @@
 # Threads Publishing API Python Sample App
 
+## Note
+**This is a Python interpretation of the javascript [sample app](https://github.com/fbsamples/threads_api) that Meta published.** It is not intended to be a client library. It's just some demo code of how to use Threads in Python.
+
+**For a proper Python client**, use my library [PyThreads](https://github.com/marclove/pythreads).
+
+---
+
 You can use this Sample App to test the [Threads API](https://developers.facebook.com/docs/threads).
 
 1. Make sure that you are using the APP ID and Secret defined for the Threads API of your app. These ARE not the same as the regular app ID and app secret.
